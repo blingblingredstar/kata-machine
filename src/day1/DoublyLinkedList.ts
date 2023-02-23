@@ -117,11 +117,15 @@ export default class DoublyLinkedList<T> {
             };
             return;
         }
-        prev.next = {
+        const node: Node<T> = {
             value: item,
             prev,
-            next: null,
+            next: prev.next,
         };
+        prev.next = node;
+        if (node.next?.prev) {
+            node.next.prev = node;
+        }
         return;
     }
     append(item: T): void {
